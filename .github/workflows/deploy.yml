@@ -24,7 +24,6 @@ jobs:
 
       - name: Build and deploy
         run: |
-          cd pages
           cargo +nightly build --target wasm32-unknown-unknown --release
           cargo +nightly install wasm-bindgen-cli
           trunk build --release
