@@ -13,19 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Rust nightly
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: nightly
-          override: true
-
       - name: Install Trunk
-        run: cargo +nightly install trunk
+        run: cargo install trunk
+
+      - name: Set up Rust nightly
+        run: |
+          rustup toolchain install nightly
+          rustup default nightly
+          rustup target add wasm32-unknown-unknown
 
       - name: Build and deploy
-        run: |
-          cargo +nightly build --target wasm32-unknown-unknown --release
-          cargo +nightly install wasm-bindgen-cli
-          trunk build --release
-          trunk serve --open
+        run: trunk serve --open
 
