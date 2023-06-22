@@ -1,3 +1,7 @@
 # Added by cargo
 
 /target
+
+# Do not include the dist directory
+
+/dist
